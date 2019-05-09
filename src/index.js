@@ -62,7 +62,7 @@ class Board extends React.Component {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
  
-    // react的jsx写法让html中直接调用this.renderSquare函数，牛批
+    // react的jsx写法让html中直接调用this.renderSquare函数，🐂🍺
     
     return (
       <div>
