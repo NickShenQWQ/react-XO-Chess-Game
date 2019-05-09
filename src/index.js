@@ -6,10 +6,9 @@ import './index.css';
 class Square extends React.Component {
   render() {
     return (
-      <button
-        className="square"
-        onClick={() => this.props.onClick()}
-      >
+      <button className="square"
+        // props取父级的点击事件和value值
+        onClick={() => this.props.onClick()}>
         {this.props.value}
       </button>
     );
@@ -18,8 +17,13 @@ class Square extends React.Component {
 
 // 棋盘组件，是一个数组，判断棋子显示状态
 class Board extends React.Component {
-  constructor(props) {
-    super(props);
+  // 当constructor()需要用到props的时候需在constructor和super中定义，这里没用到无所谓
+  // constructor(props) {
+  //   super(props);
+  constructor() {
+    // 要使用this得调用super()
+    super();
+    // 状态存储器，存数据状态
     this.state = {
       squares: Array(9).fill(null),
       xIsNext: true,
@@ -28,6 +32,7 @@ class Board extends React.Component {
   // 点击事件
   handleClick(i) {
     const squares = this.state.squares.slice();
+    // 如何获胜或者棋子满了结束点击事件
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -37,8 +42,6 @@ class Board extends React.Component {
       squares: squares,
       xIsNext: !this.state.xIsNext,
     });
-    console.log(this.state.squares)
-
   }
   // 传给棋子Square
   renderSquare(i) {
@@ -59,6 +62,8 @@ class Board extends React.Component {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
  
+    // react的jsx写法让html中直接调用this.renderSquare函数，牛批
+    
     return (
       <div>
         <div className="status">{status}</div>
